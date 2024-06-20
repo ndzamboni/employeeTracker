@@ -1,13 +1,13 @@
-// departments.js
-const db = require('../db/db');
+// departments.mjs
+import db from '../db/db.mjs';
+import inquirer from 'inquirer';
 
-async function viewAllDepartments() {
+export async function viewAllDepartments() {
   const res = await db.query('SELECT * FROM department');
   console.table(res.rows);
 }
 
-async function addDepartment() {
-  const inquirer = require('inquirer');
+export async function addDepartment() {
   const answers = await inquirer.prompt([
     {
       name: 'name',
@@ -17,8 +17,3 @@ async function addDepartment() {
   await db.query('INSERT INTO department (name) VALUES ($1)', [answers.name]);
   console.log(`Added department ${answers.name}`);
 }
-
-module.exports = {
-  viewAllDepartments,
-  addDepartment,
-};

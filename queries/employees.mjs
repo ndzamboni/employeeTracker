@@ -1,7 +1,8 @@
-// employees.js
-const db = require('../db/db');
+// employees.mjs
+import db from '../db/db.mjs';
+import inquirer from 'inquirer';
 
-async function viewAllEmployees() {
+export async function viewAllEmployees() {
   const res = await db.query(
     `SELECT e.id, e.first_name, e.last_name, role.title, department.name AS department, role.salary, 
             CONCAT(m.first_name, ' ', m.last_name) AS manager 
@@ -13,8 +14,7 @@ async function viewAllEmployees() {
   console.table(res.rows);
 }
 
-async function addEmployee() {
-  const inquirer = require('inquirer');
+export async function addEmployee() {
   const roles = await db.query('SELECT * FROM role');
   const roleChoices = roles.rows.map(({ id, title }) => ({
     name: title,
@@ -58,8 +58,7 @@ async function addEmployee() {
   console.log(`Added employee ${answers.first_name} ${answers.last_name}`);
 }
 
-async function updateEmployeeRole() {
-  const inquirer = require('inquirer');
+export async function updateEmployeeRole() {
   const employees = await db.query('SELECT * FROM employee');
   const employeeChoices = employees.rows.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
@@ -93,9 +92,3 @@ async function updateEmployeeRole() {
   ]);
   console.log(`Updated employee role`);
 }
-
-module.exports = {
-  viewAllEmployees,
-  addEmployee,
-  updateEmployeeRole,
-};

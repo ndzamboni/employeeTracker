@@ -1,7 +1,8 @@
-// roles.js
-const db = require('../db/db');
+// roles.mjs
+import db from '../db/db.mjs';
+import inquirer from 'inquirer';
 
-async function viewAllRoles() {
+export async function viewAllRoles() {
   const res = await db.query(
     `SELECT role.id, role.title, department.name AS department, role.salary 
      FROM role 
@@ -10,8 +11,7 @@ async function viewAllRoles() {
   console.table(res.rows);
 }
 
-async function addRole() {
-  const inquirer = require('inquirer');
+export async function addRole() {
   const departments = await db.query('SELECT * FROM department');
   const departmentChoices = departments.rows.map(({ id, name }) => ({
     name: name,
@@ -42,8 +42,3 @@ async function addRole() {
   );
   console.log(`Added role ${answers.title}`);
 }
-
-module.exports = {
-  viewAllRoles,
-  addRole,
-};
