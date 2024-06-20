@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "type": "module",
   "dependencies": {
-    "inquirer": "^9.2.23"
+    "pg": "^8.7.1",
+    "inquirer": "^8.2.4"
   }
 }

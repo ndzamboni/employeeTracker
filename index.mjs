@@ -1,9 +1,9 @@
-// index.js
-const inquirer = require('inquirer');
-const db = require('./db/db');
-const departmentQueries = require('./queries/departments');
-const roleQueries = require('./queries/roles');
-const employeeQueries = require('./queries/employees');
+// index.mjs
+import inquirer from 'inquirer';
+import db from './db/db.mjs';
+import { viewAllDepartments, addDepartment } from './queries/departments.mjs';
+import { viewAllRoles, addRole } from './queries/roles.mjs';
+import { viewAllEmployees, addEmployee, updateEmployeeRole } from './queries/employees.mjs';
 
 async function mainMenu() {
   const answers = await inquirer.prompt([
@@ -27,25 +27,25 @@ async function mainMenu() {
 
   switch (answers.action) {
     case 'View all departments':
-      await departmentQueries.viewAllDepartments();
+      await viewAllDepartments();
       break;
     case 'View all roles':
-      await roleQueries.viewAllRoles();
+      await viewAllRoles();
       break;
     case 'View all employees':
-      await employeeQueries.viewAllEmployees();
+      await viewAllEmployees();
       break;
     case 'Add a department':
-      await departmentQueries.addDepartment();
+      await addDepartment();
       break;
     case 'Add a role':
-      await roleQueries.addRole();
+      await addRole();
       break;
     case 'Add an employee':
-      await employeeQueries.addEmployee();
+      await addEmployee();
       break;
     case 'Update an employee role':
-      await employeeQueries.updateEmployeeRole();
+      await updateEmployeeRole();
       break;
     case 'Exit':
       db.end();
