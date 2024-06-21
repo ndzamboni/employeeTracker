@@ -3,10 +3,10 @@ import pg from 'pg';
 const { Client } = pg;
 
 const client = new Client({
-  user: 'your_username',
+  user: 'postgres',
   host: 'localhost',
-  database: 'your_database',
-  password: 'your_password',
+  database: 'employee_db',
+  password: 'Obi1k3n0bi1!',
   port: 5432,
 });
 
