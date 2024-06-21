@@ -1,4 +1,3 @@
-// index.mjs
 import inquirer from 'inquirer';
 import db from './db/db.mjs';
 import { viewAllDepartments, addDepartment } from './queries/departments.mjs';
@@ -19,7 +18,6 @@ async function mainMenu() {
         'Add a role',
         'Add an employee',
         'Update an employee role',
-        // Bonus features can be added here
         'Exit',
       ],
     },
@@ -52,7 +50,7 @@ async function mainMenu() {
       return;
   }
 
-  mainMenu();
+  await mainMenu();
 }
 
 mainMenu();

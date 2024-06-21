@@ -1,4 +1,3 @@
-// departments.mjs
 import db from '../db/db.mjs';
 import inquirer from 'inquirer';
 

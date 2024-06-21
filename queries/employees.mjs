@@ -1,4 +1,3 @@
-// employees.mjs
 import db from '../db/db.mjs';
 import inquirer from 'inquirer';
 
@@ -16,6 +15,10 @@ export async function viewAllEmployees() {
 
 export async function addEmployee() {
   const roles = await db.query('SELECT * FROM role');
+  if (roles.rows.length === 0) {
+    console.log('No roles available. Please add a role first.');
+    return;
+  }
   const roleChoices = roles.rows.map(({ id, title }) => ({
     name: title,
     value: id,
@@ -60,12 +63,20 @@ export async function addEmployee() {
 
 export async function updateEmployeeRole() {
   const employees = await db.query('SELECT * FROM employee');
+  if (employees.rows.length === 0) {
+    console.log('No employees available. Please add an employee first.');
+    return;
+  }
   const employeeChoices = employees.rows.map(({ id, first_name, last_name }) => ({
     name: `${first_name} ${last_name}`,
     value: id,
   }));
 
   const roles = await db.query('SELECT * FROM role');
+  if (roles.rows.length === 0) {
+    console.log('No roles available. Please add a role first.');
+    return;
+  }
   const roleChoices = roles.rows.map(({ id, title }) => ({
     name: title,
     value: id,
