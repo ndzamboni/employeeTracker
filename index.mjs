@@ -1,85 +1,86 @@
 import inquirer from 'inquirer';
-import { viewAllDepartments, addDepartment } from './queries/departments.mjs';
-import { viewAllRoles, addRole } from './queries/roles.mjs';
-import { viewAllEmployees, addEmployee, updateEmployeeRole } from './queries/employees.mjs';
 import chalk from 'chalk';
 import figlet from 'figlet';
-import dotenv from 'dotenv';
-dotenv.config();
+import { viewAllDepartments, addDepartment } from './queries/departments.mjs';
+import { viewAllRoles, addRole, updateRole } from './queries/roles.mjs';
+import { viewAllEmployees, addEmployee, updateEmployeeRole } from './queries/employees.mjs';
+import client from './db/db.mjs';
 
-// List of chalk colors
-const chalkColors = [
-  chalk.red,
-  chalk.green,
-  chalk.yellow,
-  chalk.blue,
-  chalk.magenta,
-  chalk.cyan,
-  chalk.white,
-  chalk.gray
-];
-
-// Main menu options
-const mainMenuOptions = [
-  'View all departments',
-  'View all roles',
-  'View all employees',
-  'Add a department',
-  'Add a role',
-  'Add an employee',
-  'Update an employee role',
-  'Exit'
-];
-
-// Function to get a random chalk color
-function getRandomColor() {
-  return chalkColors[Math.floor(Math.random() * chalkColors.length)];
+// Randomize menu item colors
+function randomColor(text) {
+  const colors = [chalk.red, chalk.green, chalk.yellow, chalk.blue, chalk.magenta, chalk.cyan, chalk.white];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  return randomColor(text);
 }
 
-// Randomize menu options with colors
-const coloredMenuOptions = mainMenuOptions.map((option, index) => ({
-  name: getRandomColor()(`${index + 1}. ${option}`),
-  value: index
-}));
+const mainMenuChoices = [
+  { name: randomColor('View all departments'), value: 'view_departments' },
+  { name: randomColor('View all roles'), value: 'view_roles' },
+  { name: randomColor('View all employees'), value: 'view_employees' },
+  { name: randomColor('Add a department'), value: 'add_department' },
+  { name: randomColor('Add a role'), value: 'add_role' },
+  { name: randomColor('Add an employee'), value: 'add_employee' },
+  { name: randomColor('Update an employee role'), value: 'update_employee_role' },
+  { name: randomColor('Update a role'), value: 'update_role' },
+  { name: randomColor('Exit'), value: 'exit' }
+];
+
+async function displayAsciiArt() {
+  return new Promise((resolve, reject) => {
+    figlet('Employee Tracker', (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}
 
 async function mainMenu() {
-  console.log(chalk.green(figlet.textSync('Employee Tracker')));
+  const asciiArt = await displayAsciiArt();
+  console.log(chalk.cyan(asciiArt));
 
   const { action } = await inquirer.prompt([
     {
       type: 'list',
       name: 'action',
       message: 'What would you like to do?',
-      choices: coloredMenuOptions
+      choices: mainMenuChoices
     }
   ]);
 
   switch (action) {
-    case 0:
+    case 'view_departments':
       await viewAllDepartments();
       break;
-    case 1:
+    case 'view_roles':
       await viewAllRoles();
       break;
-    case 2:
+    case 'view_employees':
       await viewAllEmployees();
       break;
-    case 3:
+    case 'add_department':
       await addDepartment();
       break;
-    case 4:
+    case 'add_role':
       await addRole();
       break;
-    case 5:
+    case 'add_employee':
       await addEmployee();
       break;
-    case 6:
+    case 'update_employee_role':
       await updateEmployeeRole();
       break;
-    case 7:
-      process.exit();
+    case 'update_role':
+      await updateRole();
+      break;
+    case 'exit':
+      await client.end();
+      console.log('Goodbye!');
+      process.exit(0);
   }
-  await mainMenu(); // Ensure the main menu is called again after each action
+  await mainMenu();
 }
 
 mainMenu();
