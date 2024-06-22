@@ -30,7 +30,7 @@ function mainMenu() {
   displayHeader();  // Display the header before the menu
 
   rl.question(chalk.yellow('What would you like to do? (Type the number)\n') +
-              chalk.green('1. View all departments\n') +
+              chalk.red('1. View all departments\n') +
               chalk.green('2. View all roles\n') +
               chalk.blue('3. View all employees\n') +
               chalk.magenta('4. Add a department\n') +
