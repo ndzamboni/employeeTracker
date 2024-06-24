@@ -1,6 +1,8 @@
 
 # Employee Data Tracker App!
 
+https://github.com/ndzamboni/employeeTracker
+
 ![Badge](https://img.shields.io/badge/PostgreSQL-green) ![Badge](https://img.shields.io/badge/MJS-red) ![Badge](https://img.shields.io/badge/Javascript-blue) ![Badge](https://img.shields.io/badge/CLI-white) ![Badge](https://img.shields.io/badge/inquirer-yellow)
 
 ## 📖 Description
@@ -41,7 +43,7 @@ nick zamboni
 
 ndzamboni
 [![Twitter](https://img.shields.io/badge/Twitter-nickzamb-blue)](https://twitter.com/nickzamb)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-404-blue)](https://www.linkedin.com/in/404)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-404-blue)](https://www.linkedin.com/in/nick-zamboni-44664b10b/)
 [![GitHub](https://img.shields.io/badge/GitHub-ndzamboni-blue)](https://github.com/ndzamboni)
 
 ## 📜 License
