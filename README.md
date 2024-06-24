@@ -29,7 +29,9 @@ node index.mjs
 
 ## 🎥 Demo
 
-n/a
+<!-- how to insert screenshots -->
+![Alt Text](./demo/demo1.PNG)
+![Alt Text](./demo/demo2.PNG)
 
 ## 🤝 Contributions
 
