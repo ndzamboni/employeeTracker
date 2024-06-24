@@ -43,7 +43,7 @@ nick zamboni
 
 ndzamboni
 [![Twitter](https://img.shields.io/badge/Twitter-nickzamb-blue)](https://twitter.com/nickzamb)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nick-Zamboni-blue)](https://www.linkedin.com/in/nick-zamboni-44664b10b/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nick-blue)](https://www.linkedin.com/in/nick-zamboni-44664b10b/)
 [![GitHub](https://img.shields.io/badge/GitHub-ndzamboni-blue)](https://github.com/ndzamboni)
 
 ## 📜 License
