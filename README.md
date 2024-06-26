@@ -7,7 +7,7 @@ https://github.com/ndzamboni/employeeTracker
 
 ## 📖 Description
 
-This app takes the user input to store, update, add, remove employee data in detail. This app stores data to a Postgre SQL database and allows the user to easily manipulate the data via this app. 
+This app takes the user input to store, update, add, remove employee data in detail. This app stores data to a Postgre SQL database and allows the user to easily manipulate the data via this app. Using "chalk" the backend app randomizes the menu item colors each time the app is started. This app will be able to be run through the back end as well as server side with a UI. IN DEVELOPMENT
 
 ## 📑 Table of Contents
 
