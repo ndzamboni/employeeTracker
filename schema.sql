@@ -1,7 +1,15 @@
 -- schema.sql
+-- This file contains the schema for the employee_db database.
+DROP DATABASE IF EXISTS employee_db;
+
+CREATE DATABASE employee_db;
+
+\c employee_db;
+
+DROP TABLE IF EXISTS department CASCADE;
 DROP TABLE IF EXISTS employee CASCADE;
 DROP TABLE IF EXISTS role CASCADE;
-DROP TABLE IF EXISTS department CASCADE;
+
 
 CREATE TABLE department (
     id SERIAL PRIMARY KEY,

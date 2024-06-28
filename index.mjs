@@ -5,7 +5,7 @@ import { viewAllDepartments, addDepartment, deleteDepartment } from './queries/d
 import { viewAllRoles, addRole, deleteRole } from './queries/roles.mjs';
 import { viewAllEmployees, addEmployee, updateEmployeeRole, updateEmployeeManager, viewEmployeesByManager, deleteEmployee } from './queries/employees.mjs';
 
-function showMenu() {
+async function showMenu() {
   console.clear();
   figlet('Employee Tracker', (err, data) => {
     if (err) {
@@ -36,97 +36,83 @@ function showMenu() {
           'Exit',
         ],
       },
-    ]).then((answers) => {
-      handleMenuSelection(answers.action);
+    ]).then(async (answers) => {
+      await handleMenuSelection(answers.action);
     });
   });
 }
 
-function handleMenuSelection(action) {
+async function handleMenuSelection(action) {
   switch (action) {
     case 'View all departments':
-      viewAllDepartments().then(() => showMenu());
+      await viewAllDepartments();
       break;
     case 'View all roles':
-      viewAllRoles().then(() => showMenu());
+      await viewAllRoles();
       break;
     case 'View all employees':
-      viewAllEmployees().then(() => showMenu());
+      await viewAllEmployees();
       break;
     case 'Add a department':
-      inquirer.prompt([
-        { type: 'input', name: 'name', message: 'Enter department name:' }
-      ]).then((answers) => {
-        addDepartment(answers.name).then(() => showMenu());
-      });
+      const { name } = await inquirer.prompt([{ type: 'input', name: 'name', message: 'Enter department name:' }]);
+      await addDepartment(name);
       break;
     case 'Add a role':
-      inquirer.prompt([
+      const roleAnswers = await inquirer.prompt([
         { type: 'input', name: 'title', message: 'Enter role title:' },
         { type: 'input', name: 'salary', message: 'Enter role salary:' },
         { type: 'input', name: 'department_id', message: 'Enter department ID:' },
-      ]).then((answers) => {
-        addRole(answers.title, answers.salary, answers.department_id).then(() => showMenu());
-      });
+      ]);
+      await addRole(roleAnswers.title, roleAnswers.salary, roleAnswers.department_id);
       break;
     case 'Add an employee':
-      inquirer.prompt([
+      const employeeAnswers = await inquirer.prompt([
         { type: 'input', name: 'first_name', message: 'Enter first name:' },
         { type: 'input', name: 'last_name', message: 'Enter last name:' },
         { type: 'input', name: 'role_id', message: 'Enter role ID:' },
         { type: 'input', name: 'manager_id', message: 'Enter manager ID (or leave blank if none):', default: null },
-      ]).then((answers) => {
-        addEmployee(answers.first_name, answers.last_name, answers.role_id, answers.manager_id).then(() => showMenu());
-      });
+      ]);
+      await addEmployee(employeeAnswers.first_name, employeeAnswers.last_name, employeeAnswers.role_id, employeeAnswers.manager_id);
       break;
     case 'Update employee role':
-      inquirer.prompt([
+      const updateRoleAnswers = await inquirer.prompt([
         { type: 'input', name: 'employee_id', message: 'Enter employee ID:' },
         { type: 'input', name: 'role_id', message: 'Enter new role ID:' },
-      ]).then((answers) => {
-        updateEmployeeRole(answers.employee_id, answers.role_id).then(() => showMenu());
-      });
+      ]);
+      await updateEmployeeRole(updateRoleAnswers.employee_id, updateRoleAnswers.role_id);
       break;
     case 'Update employee manager':
-      inquirer.prompt([
+      const updateManagerAnswers = await inquirer.prompt([
         { type: 'input', name: 'employee_id', message: 'Enter employee ID:' },
         { type: 'input', name: 'manager_id', message: 'Enter new manager ID:' },
-      ]).then((answers) => {
-        updateEmployeeManager(answers.employee_id, answers.manager_id).then(() => showMenu());
-      });
+      ]);
+      await updateEmployeeManager(updateManagerAnswers.employee_id, updateManagerAnswers.manager_id);
       break;
     case 'View employees by manager':
-      inquirer.prompt([
-        { type: 'input', name: 'manager_id', message: 'Enter manager ID:' },
-      ]).then((answers) => {
-        viewEmployeesByManager(answers.manager_id).then(() => showMenu());
-      });
+      const { manager_id } = await inquirer.prompt([{ type: 'input', name: 'manager_id', message: 'Enter manager ID:' }]);
+      await viewEmployeesByManager(manager_id);
       break;
     case 'Delete a department':
-      inquirer.prompt([
-        { type: 'input', name: 'id', message: 'Enter department ID:' },
-      ]).then((answers) => {
-        deleteDepartment(answers.id).then(() => showMenu());
-      });
+      const { id: depId } = await inquirer.prompt([{ type: 'input', name: 'id', message: 'Enter department ID:' }]);
+      await deleteDepartment(depId);
       break;
     case 'Delete a role':
-      inquirer.prompt([
-        { type: 'input', name: 'id', message: 'Enter role ID:' },
-      ]).then((answers) => {
-        deleteRole(answers.id).then(() => showMenu());
-      });
+      const { id: roleId } = await inquirer.prompt([{ type: 'input', name: 'id', message: 'Enter role ID:' }]);
+      await deleteRole(roleId);
       break;
     case 'Delete an employee':
-      inquirer.prompt([
-        { type: 'input', name: 'id', message: 'Enter employee ID:' },
-      ]).then((answers) => {
-        deleteEmployee(answers.id).then(() => showMenu());
-      });
+      const { id: empId } = await inquirer.prompt([{ type: 'input', name: 'id', message: 'Enter employee ID:' }]);
+      await deleteEmployee(empId);
       break;
     case 'Exit':
       console.log('Goodbye!');
       process.exit();
   }
+
+  // Pause after action
+  await inquirer.prompt([{ type: 'input', name: 'continue', message: 'Press Enter to continue...' }]);
+
+  await showMenu();
 }
 
 showMenu();

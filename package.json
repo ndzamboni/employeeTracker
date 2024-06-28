@@ -16,7 +16,7 @@
     "dotenv": "^16.4.5",
     "figlet": "^1.7.0",
     "gradient-string": "^2.0.2",
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.6",
     "pg": "^8.12.0"
   }
 }
