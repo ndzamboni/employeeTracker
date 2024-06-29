@@ -62,3 +62,23 @@ export async function deleteEmployee(id) {
     console.error('Error deleting employee:', err);
   }
 }
+
+export async function getAllRoles() {
+  try {
+    const res = await client.query('SELECT id, title FROM role;');
+    return res.rows;
+  } catch (err) {
+    console.error('Error fetching roles:', err);
+    return [];
+  }
+}
+
+export async function getAllManagers() {
+  try {
+    const res = await client.query('SELECT id, first_name, last_name FROM employee;');
+    return res.rows;
+  } catch (err) {
+    console.error('Error fetching managers:', err);
+    return [];
+  }
+}
