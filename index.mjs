@@ -64,7 +64,7 @@ async function handleMenuSelection(action) {
           { type: 'input', name: 'salary', message: 'Enter role salary:' },
           { type: 'input', name: 'department_id', message: 'Enter department ID:' },
         ]);
-        await addRole(roleAnswers.title, roleAnswers.salary, parseInt(roleAnswers.department_id));
+        await addRole(roleAnswers.title, roleAnswers.salary, roleAnswers.department_id);
         break;
       case 'Add an employee':
         const employeeAnswers = await inquirer.prompt([
