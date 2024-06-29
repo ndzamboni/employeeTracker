@@ -3,9 +3,7 @@ import 'console.table';
 
 export async function viewAllDepartments() {
   try {
-    console.log('Fetching all departments...');
     const res = await client.query('SELECT * FROM department;');
-    console.log('Query result:', res);
     if (res.rows.length === 0) {
       console.log('No departments found.');
     } else {
@@ -18,7 +16,6 @@ export async function viewAllDepartments() {
 
 export async function addDepartment(name) {
   try {
-    console.log(`Adding department: ${name}`);
     const res = await client.query('INSERT INTO department (name) VALUES ($1) RETURNING *', [name]);
     console.log('Department added:', res.rows[0]);
   } catch (err) {
@@ -28,7 +25,6 @@ export async function addDepartment(name) {
 
 export async function deleteDepartment(id) {
   try {
-    console.log(`Deleting department with ID: ${id}`);
     const res = await client.query('DELETE FROM department WHERE id = $1 RETURNING *', [id]);
     console.log('Department deleted:', res.rows[0]);
   } catch (err) {
