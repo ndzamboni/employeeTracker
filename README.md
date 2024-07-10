@@ -36,7 +36,7 @@ node index.mjs
 ![Alt Text](./demo/demo2.PNG)
 
 
-[Video Walkthrough]([Employee Tracker Backend App](https://drive.google.com/file/d/1vE-6XOqLmURD5VMYwmxeygnjbt3opOtf/view?usp=sharing)
+[Video Walkthrough][Employee Tracker Backend App](https://drive.google.com/file/d/1vE-6XOqLmURD5VMYwmxeygnjbt3opOtf/view?usp=sharing)
 
 
 ## 🤝 Contributions
